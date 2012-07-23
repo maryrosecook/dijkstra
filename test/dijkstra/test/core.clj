@@ -22,6 +22,8 @@
      {:id "103", :length 6851}]
     :distance 20}})
 
+(defn now [] (.getTime (new java.util.Date)))
+
 ;; contains-node?
 
 (deftest test-does-contains-node?
@@ -89,28 +91,17 @@
     (is (= nil
            (get-best-node nodes)))))
 
-;; consider
-
-(deftest test-consider-moves-node-from-unvisited-to-visited
-  (let [current {:id "199", :distance read-data/infinity
-                 :neighbours [{:id "141", :length 2621}]}
-        unvisited #{current}
-        visited #{{:id "200", :distance read-data/infinity
-                     :neighbours [{:id "180", :length 2621}]}}]
-    (let [{new-unvisited :unvisited new-visited :visited}
-          (consider current unvisited visited)]
-      (is (= #{} new-unvisited))
-      (is (= (clojure-set/union unvisited visited)
-             new-visited)))))
-
 ;; dijkstra
 
 (deftest test-consider-moves-node-from-unvisited-to-visited
-  (let [unvisited (read-data/get-nodes)
+  (let [start (now)
+        unvisited (read-data/get-nodes)
         source (get-node unvisited "1")
         prepped-source (assoc source :distance 0)
         unvisited-with-prepped-source (conj (disj unvisited source) prepped-source)
         visited (dijkstra unvisited-with-prepped-source #{})]
+
     (is (= [2599 2610 2947 2052 2367 2399 2029 2442 2505 3068]
            (map (fn [x] (:distance (get-node visited x)))
-                ["7" "37" "59" "82" "99" "115" "133" "165" "188" "197"])))))
+                ["7" "37" "59" "82" "99" "115" "133" "165" "188" "197"])))
+    (println (str "Completed Coursera test in: " (/ (- (now) start) 1000.0) "s"))))
