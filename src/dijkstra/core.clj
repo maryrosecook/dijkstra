@@ -1,15 +1,10 @@
 (ns dijkstra.core
   (:require [dijkstra.read-data :as read-data]))
 
-(defn contains-node? [coll id]
-  (some #{id} (map (fn [x] (-> x :id)) coll)))
-
-(defn get-node [coll id]
-  (first (filter (fn [x] (= id (-> x :id))) coll)))
-
 (defn consider-neighbour [neighbour current unvisited]
   (let [tentative-length (+ (-> current :distance) (-> neighbour :length))
-        neighbour-node (get-node unvisited (-> neighbour :id))]
+        neighbour-node (first (filter (fn [x] (= (-> neighbour :id) (-> x :id)))
+                                      unvisited))]
     (if (< tentative-length (-> neighbour-node :distance))
       (conj (disj unvisited neighbour-node)
             (assoc neighbour-node :distance tentative-length))
@@ -19,7 +14,8 @@
   (if (empty? neighbours)
     unvisited
     (consider-neighbours (rest neighbours) current
-                         (if (contains-node? unvisited (-> (first neighbours) :id))
+                         (if (some #{(-> (first neighbours) :id)}
+                                   (map (fn [x] (-> x :id)) unvisited))
                            (consider-neighbour (first neighbours) current unvisited) ;;handle
                            unvisited)))) ;; skip
 

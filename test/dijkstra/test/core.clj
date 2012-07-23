@@ -24,24 +24,8 @@
 
 (defn now [] (.getTime (new java.util.Date)))
 
-;; contains-node?
-
-(deftest test-does-contains-node?
-  (is (contains-node? nodes "199")))
-
-(deftest test-does-not-contains-node?
-  (is (not (contains-node? nodes "288"))))
-
-(deftest test-does-not-contains-node-if-has-neighbour?
-  (is (not (contains-node? nodes "108"))))
-
-;; get-node
-
-(deftest test-can-get-node
-  (is (= "199" (:id (get-node nodes "199")))))
-
-(deftest test-get-node-returns-nil-for-non-existent-node
-  (is (nil? (get-node nodes "123234"))))
+(defn get-node [coll id]
+  (first (filter (fn [x] (= id (-> x :id))) coll)))
 
 ;; consider-neighbour
 
