@@ -1,7 +1,4 @@
 (ns dijkstra.core
-  (:use [clojure.pprint])
-  (:import java.io.File)
-  (:require [clojure.string :as str])
   (:require [dijkstra.read-data :as read-data]))
 
 (defn contains-node? [coll id]
