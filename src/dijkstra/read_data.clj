@@ -19,14 +19,15 @@
   (if (empty? lines)
     nodes
     (let [line (str/split (str/replace (first lines) "\r" "") #"\t")
+          id (first line)
           node (parse-edges (rest line)
-                            {:id (first line)
+                            {:id id
                              :neighbours []
                              :distance infinity
                              :visited false})]
-      (parse-lines (rest lines) (conj nodes node)))))
+      (parse-lines (rest lines) (assoc nodes id node)))))
 
 (defn get-nodes []
   (let [data-str (slurp (File. "dijkstraData.txt"))
         lines (str/split data-str #"\n")]
-    (parse-lines lines #{})))
+    (parse-lines lines {})))
