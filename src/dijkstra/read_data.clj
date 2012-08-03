@@ -23,8 +23,7 @@
           node (parse-edges (rest line)
                             {:id id
                              :neighbours []
-                             :distance infinity
-                             :visited false})]
+                             :distance infinity})]
       (parse-lines (rest lines) (assoc nodes id node)))))
 
 (defn get-nodes []
