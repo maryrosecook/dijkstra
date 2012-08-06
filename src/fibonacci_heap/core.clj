@@ -1,3 +1,5 @@
+;; from: http://github.com/maryrosecook/fibonacciheap
+
 (ns fibonacci-heap.core
   (:require [clojure.zip :as z])
   (:use [clojure.pprint]))
