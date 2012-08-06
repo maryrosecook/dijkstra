@@ -1,9 +1,7 @@
 (ns dijkstra.test.with-array-walk
   (:use [dijkstra.with-array-walk])
   (:use [clojure.test])
-  (:use [clojure.pprint])
-  (:require [dijkstra.read-data :as read-data])
-  (:require [clojure.set :as clojure-set]))
+  (:require [dijkstra.read-data :as read-data]))
 
 (def nodes
   {"199" {:id "199",
