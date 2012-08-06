@@ -1,4 +1,4 @@
-(ns dijkstra.core
+(ns dijkstra.with-array-walk
   (:require [dijkstra.read-data :as read-data]))
 
 (defn consider-neighbour [neighbour current unvisited]

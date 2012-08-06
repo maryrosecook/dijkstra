@@ -1,5 +1,5 @@
-(ns dijkstra.test.core
-  (:use [dijkstra.core])
+(ns dijkstra.test.with-array-walk
+  (:use [dijkstra.with-array-walk])
   (:use [clojure.test])
   (:use [clojure.pprint])
   (:require [dijkstra.read-data :as read-data])
@@ -85,4 +85,4 @@
     (is (= [2599 2610 2947 2052 2367 2399 2029 2442 2505 3068]
            (map (fn [x] (:distance (get visited x)))
                 ["7" "37" "59" "82" "99" "115" "133" "165" "188" "197"])))
-    (println (str "Completed Coursera test in: " (/ (- (now) start) 1000.0) "s"))))
+    (println (str "Dijkstra with array walk: " (/ (- (now) start) 1000.0) "s"))))
