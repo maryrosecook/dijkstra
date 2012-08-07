@@ -40,15 +40,13 @@
         best-id (-> best-heap-node :id)]
     (if (nil? best-heap-node)
       visited ;; finished
-      (let []
-        ;; (pprint nodes)
         (let [{new-heap :heap considered-nodes :nodes}
               (consider-neighbours (:neighbours (get nodes best-id))
                                    best-heap-node
                                    {:heap (fib/extract-min heap) :nodes nodes})
               new-visited (assoc visited best-id (get considered-nodes best-id))
               new-nodes (dissoc considered-nodes best-id)]
-          (dijkstra {:heap new-heap :nodes new-nodes} new-visited))))))
+          (dijkstra {:heap new-heap :nodes new-nodes} new-visited)))))
 
 (defn nodes-to-heap [nodes]
   (reduce (fn [heap x]
